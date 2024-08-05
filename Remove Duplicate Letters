@@ -1,0 +1,25 @@
+class Solution {
+public:
+    string removeDuplicateLetters(string s) {
+        unordered_map<char,int>frequency;
+        for(char c : s){
+            frequency[c]++;
+        }
+        unordered_set<char> isAvailable;
+        string answer;
+        for(char c : s){
+            if(isAvailable.find(c) != isAvailable.end()){
+                frequency[c]--;
+                continue;
+            }
+            while(answer.size() > 0 && answer[answer.size() -1] > c && frequency[answer[answer.size() - 1]] > 0){
+                isAvailable.erase(answer[answer.size() - 1]);
+                answer.pop_back();
+            }
+            answer.push_back(c);
+            frequency[c]--;
+            isAvailable.insert(c);
+        }
+        return answer;
+    }
+};
