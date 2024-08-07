@@ -1,0 +1,16 @@
+first method
+ class Solution {
+public:
+    int trap(vector<int>& height) {
+        int prevtMax, currMax;
+        int sum = 0;
+        for(int i =0; i<height.size(); i++){
+            int leftMax = *max_element(height.begin(), height.begin()+i+1);
+            int rightMax = *max_element(height.begin()+i,height.end());
+            sum += min(leftMax, rightMax) - height[i];
+        }
+        return sum;
+    }
+};
+
+2nd method
