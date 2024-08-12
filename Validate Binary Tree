@@ -1,0 +1,24 @@
+class Solution {
+public:
+
+    void In(TreeNode* root, vector<int> &v){
+        if(root){
+            In(root->left, v);
+            v.push_back(root->val);
+            In(root->right,v);
+        }
+    }
+    bool isValidBST(TreeNode* root) {
+        if(root == NULL){
+            return root;
+        }
+        vector<int> v;
+        In(root,v);
+        for(int i =0; i<v.size()-1; i++){
+            if(v[i]>= v[i+1]){
+                return false;
+            }
+        }
+        return true;
+    }
+};
