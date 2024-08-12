@@ -1,0 +1,28 @@
+class Solution {
+public:
+    void getAncestor(TreeNode* root, TreeNode* node, vector<TreeNode*> &vec){
+        if(root->val == node->val){
+            vec.push_back(root);
+        }
+        else if(root->val != node->val){
+            if(node->val < root->val)
+                getAncestor(root->left, node, vec);
+            else
+                getAncestor(root->right, node, vec);
+            vec.push_back(root);
+        }
+    }
+    TreeNode* lowestCommonAncestor(TreeNode* root, TreeNode* p, TreeNode* q) {
+        vector<TreeNode*> v1, v2;
+        getAncestor(root,p,v1);
+        getAncestor(root,q,v2);
+        TreeNode* ans;
+        for(TreeNode* v : v2){
+           if(find(v1.begin(), v1.end(), v) != v1.end()){
+            ans = v;
+            break;
+           }
+        }
+        return ans;
+    }
+};
